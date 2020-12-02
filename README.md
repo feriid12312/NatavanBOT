@@ -13,7 +13,7 @@ Maria [xəbər kalalına](https://t.me/MarieNews) qoşularaq repo haqqında yeni
 
 Alternativ olaraq, şəxsən mənimlə [Telegramda əlaqə](https://t.me/valiyevali) əlaqə saxlaya bilərsiz.
 
-## Herokuya deploy etmək üçün aşaqdakı butona basın!
+## Herokuya deploy etmək üçün aşaqdakı butona basın! (Asan yol)
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaBOT)
 
