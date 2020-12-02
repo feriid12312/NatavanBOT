@@ -22,7 +22,7 @@ Salam {}, mənim adım {}! Mənim haqqımda məlumat öyrənmək üçün /help y
 
 Mən qrup idarə edicisiyəm və [sabibim budur](tg://user?id={}).
 
-Mənim yeniləmələrim haqqında - @MarieChechi & və dəstək qrupumuz olan @LamiyaSupport kanalına qatıla bilərsiz.
+Mənim yeniləmələrim haqqında - @MarieChechi & və dəstək qrupumuz olan @LamiyaSupport -a qatıla bilərsiz.
 
 Əgər sizində belə botunuzun olmasın istəyirsizsə bu botu [Heroku hesabınıza deploy edərək](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaBOT),
 mənim kimi klon bot hazırlaya bilərsiz..
