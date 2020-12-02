@@ -18,36 +18,36 @@ from tg_bot.modules.helper_funcs.chat_status import is_user_admin
 from tg_bot.modules.helper_funcs.misc import paginate_modules
 
 PM_START_TEXT = """
-hoi {}, my name is {}! if you have any questions about how to use me please give me /help... 
+Salam {}, mənim adım {}! Mənim haqqımda məlumat öyrənmək üçün /help yaz... 
 
-im a group manager bot maintained by  [this person](tg://user?id={}).
+Mən qrup idarə edicisiyəm və [sabibim budur](tg://user?id={}).
 
-My future updates will be put into This Channel - @MarieChechi & My Support Group @InFoTelGroup.
+Mənim yeniləmələrim haqqında - @MarieChechi & və dəstək qrupumuz olan @LamiyaSupport kanalına qatıla bilərsiz.
 
-This is my [Deploy Code](https://heroku.com/deploy?template=https://github.com/TGExplore/Marie-2.0-English),
-you can create clone same like me..
+Əgər sizində belə botunuzun olmasın istəyirsizsə bu botu [Heroku hesabınıza deploy edərək](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaBOT),
+mənim kimi klon bot hazırlaya bilərsiz..
 
-For more commands click /help...
+Daha çox məlumat üçün /help yazın...
 
-**Keep in mind that any changes you DO do to the source have to be on github, as per the license.**
+**Diqqət!!! Kodlarda olan hər hansı dəyişiklik lisenziyaya uyğun olaraq github-da olmalıdır.**
 
 """
 
 HELP_STRINGS = """
 
-Hello! my name *{}*.
+Salam! mənim adım *{}*.
 
-*Main* available commands:
- - /start: Start the bot...
- - /help: help....
- - /donate: To find out more about donating!
+*Əsas* komandalar:
+ - /start: Botu başlat...
+ - /help: Kömək....
+ - /donate: Pul bağışı etmək üçün link!
  - /settings:
-   - in PM: To find out what SETTINGS you have set....
-   - in a group:
+   - ayarladığınız funksiyaları görmək üçün....
+   - grup içində:
 
 {}
-And the following:
-""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAll of the following commands  / or ! can  be used...\n")
+Və:
+""".format(dispatcher.bot.first_name, "" if not ALLOW_EXCL else "\nAşağıdakı bütün ayarlar !,/ işarələri ilə istifadə edilə bilər.\n")
 
 DONATE_STRING = """Heya, glad to hear you want to donate!
 It took lots of work for [my creator](t.me/SonOfLars) to get me to where I am now, and every donation helps \
