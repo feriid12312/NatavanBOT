@@ -9,7 +9,7 @@ Marie and I are moderating a [support group](https://t.me/MarieSupport), where y
 bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. Of course
 I'll also help when a database schema changes, and some table column needs to be modified/added. Note to maintainers that all schema changes will be found in the commit messages, and its their responsibility to read any new commits.
 
-Maria [xəbər kalalına](https://t.me/MarieNews) qoşularaq repo haqqında yenilikləri görə bilərsiz.
+Maria [xəbər kanalına](https://t.me/MarieNews) qoşularaq repo haqqında yenilikləri görə bilərsiz.
 
 Alternativ olaraq, şəxsən mənimlə [Telegramda əlaqə](https://t.me/valiyevali) əlaqə saxlaya bilərsiz.
 
