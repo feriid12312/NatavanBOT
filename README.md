@@ -1,23 +1,21 @@
 # Azərbaycan dilində Qrup İdarəedici Lamiya Bot
-Bot python proqramlaşdırma dili ilə işləyir.
+Bot python proqramlaşdırma dili ilə işləyir. 
 
-Originally a simple group management bot with multiple admin features, it has evolved, becoming extremely modular and 
-simple to use.
+Mən qrupda idarə etməni sadələşdirirəm. Bu reponu Herokuya deploy edərək istifadə edə bilərsən.
 
-Can be found on telegram as [Marie](https://t.me/BanhammerMarie_bot).
+Mən [Marie](https://t.me/BanhammerMarie_bot) reposundan istifadə edərək [Lamiya Bot](t.me/LamiyaHelpBot) kimi bot tərcümə etmişəm Səndə bunu öz botuna deploy edə bilərsən.
 
 Marie and I are moderating a [support group](https://t.me/MarieSupport), where you can ask for help setting up your
 bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. Of course
 I'll also help when a database schema changes, and some table column needs to be modified/added. Note to maintainers that all schema changes will be found in the commit messages, and its their responsibility to read any new commits.
 
-Join the [news channel](https://t.me/MarieNews) if you just want to stay in the loop about new features or
-announcements.
+Maria [xəbər kalalına](https://t.me/MarieNews) qoşularaq repo haqqında yenilikləri görə bilərsiz.
 
-Alternatively, [find me on telegram](https://t.me/SonOfLars)! (Keep all support questions in the support chat, where more people can help you.)
+Alternativ olaraq, şəxsən mənimlə [Telegramda əlaqə](https://t.me/valiyevali) əlaqə saxlaya bilərsiz.
 
-## You can also tap the Deploy To Heroku button below to deploy straight to Heroku!
+## Herokuya deploy etmək üçün aşaqdakı butona basın!
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/TGExplore/Marie-2.0-English)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaBOT)
 
 ## Starting the bot.
 
