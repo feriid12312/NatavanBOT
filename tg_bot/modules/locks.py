@@ -18,19 +18,19 @@ from tg_bot.modules.helper_funcs.filters import CustomFilters
 from tg_bot.modules.log_channel import loggable
 from tg_bot.modules.sql import users_sql
 
-LOCK_TYPES = {'sticker': Filters.sticker,
-              'audio': Filters.audio,
-              'voice': Filters.voice,
-              'document': Filters.document,
-              'video': Filters.video,
-              'contact': Filters.contact,
-              'photo': Filters.photo,
-              'gif': Filters.document & CustomFilters.mime_type("video/mp4"),
-              'url': Filters.entity(MessageEntity.URL) | Filters.caption_entity(MessageEntity.URL),
-              'bots': Filters.status_update.new_chat_members,
-              'forward': Filters.forwarded,
-              'game': Filters.game,
-              'location': Filters.location,
+LOCK_TYPES = {'sticker (Stikerlər)': Filters.sticker,
+              'audio (Musiqilər)': Filters.audio,
+              'voice (Səs atmaq)': Filters.voice,
+              'document (Fayl göndərmək)': Filters.document,
+              'video (Video göndərmək)': Filters.video,
+              'contact (Kontakt paylaşmaq)': Filters.contact,
+              'photo (Şəkil)': Filters.photo,
+              'gif (GIF)': Filters.document & CustomFilters.mime_type("video/mp4"),
+              'url (Link göndərmək)': Filters.entity(MessageEntity.URL) | Filters.caption_entity(MessageEntity.URL),
+              'bots (Botlar)': Filters.status_update.new_chat_members,
+              'forward (Yönləndirilmiş mesajlar)': Filters.forwarded,
+              'game (Sətraltı oyunlar)': Filters.game,
+              'location (Məkan paylaşımı)': Filters.location,
               }
 
 GIF = Filters.document & CustomFilters.mime_type("video/mp4")
@@ -39,9 +39,9 @@ MEDIA = Filters.audio | Filters.document | Filters.video | Filters.voice | Filte
 MESSAGES = Filters.text | Filters.contact | Filters.location | Filters.venue | Filters.command | MEDIA | OTHER
 PREVIEWS = Filters.entity("url")
 
-RESTRICTION_TYPES = {'messages': MESSAGES,
-                     'media': MEDIA,
-                     'other': OTHER,
+RESTRICTION_TYPES = {'messages (Mesajlar)': MESSAGES,
+                     'media (Ümumi Media)': MEDIA,
+                     'other (Digər)': OTHER,
                      # 'previews': PREVIEWS, # NOTE: this has been removed cos its useless atm.
                      'all': Filters.all}
 
@@ -92,7 +92,7 @@ def unrestr_members(bot, chat_id, members, messages=True, media=True, other=True
 
 @run_async
 def locktypes(bot: Bot, update: Update):
-    update.effective_message.reply_text("\n - ".join(["Locks: "] + list(LOCK_TYPES) + list(RESTRICTION_TYPES)))
+    update.effective_message.reply_text("\n - ".join(["Qapana biləcək funksiyalar: "] + list(LOCK_TYPES) + list(RESTRICTION_TYPES)))
 
 
 @user_admin
@@ -106,7 +106,7 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
         if len(args) >= 1:
             if args[0] in LOCK_TYPES:
                 sql.update_lock(chat.id, args[0], locked=True)
-                message.reply_text("Locked {} messages for all non-admins!".format(args[0]))
+                message.reply_text("{} qeyd olunan funksiya bağlandı!".format(args[0]))
 
                 return "<b>{}:</b>" \
                        "\n#LOCK" \
@@ -128,10 +128,10 @@ def lock(bot: Bot, update: Update, args: List[str]) -> str:
                                                           mention_html(user.id, user.first_name), args[0])
 
             else:
-                message.reply_text("What are you trying to lock...? Try /locktypes for the list of lockables")
+                message.reply_text("Nəyi kilitləməyə çalışdığına əmin ola bilmədim... /locktypes yazaraq qapatmaq istədiyin funksiyanın bu siyahıda olub olmadığını yoxla.")
 
     else:
-        message.reply_text("I'm not an administrator, or haven't got delete rights.")
+        message.reply_text("Mən ya admin deyiləm yada mesaj silmə özəlliyimi bağlamısan 😏")
 
     return ""
 
@@ -181,10 +181,10 @@ def unlock(bot: Bot, update: Update, args: List[str]) -> str:
                        "\nUnlocked <code>{}</code>.".format(html.escape(chat.title),
                                                             mention_html(user.id, user.first_name), args[0])
             else:
-                message.reply_text("What are you trying to unlock...? Try /locktypes for the list of lockables")
+                message.reply_text("Nəyi kilitləməyə çalışdığına əmin ola bilmədim... /locktypes yazaraq qapatmaq istədiyin funksiyanın bu siyahıda olub olmadığını yoxla.")
 
         else:
-            bot.sendMessage(chat.id, "What are you trying to unlock...?")
+            bot.sendMessage(chat.id, "Kilidini açacağın funksiya barədə heç bir məlumat tapılmadı...")
 
     return ""
 
@@ -202,17 +202,17 @@ def del_lockables(bot: Bot, update: Update):
                 for new_mem in new_members:
                     if new_mem.is_bot:
                         if not is_bot_admin(chat, bot.id):
-                            message.reply_text("I see a bot, and I've been told to stop them joining... "
-                                               "but I'm not admin!")
+                            message.reply_text("Bir bot görürəm adminlərə onu dayandırmalı olduğumu deməliyəm "
+                                               "amma admin deyiləm!")
                             return
 
                         chat.kick_member(new_mem.id)
-                        message.reply_text("Only admins are allowed to add bots to this chat! Get outta here.")
+                        message.reply_text("Bu qrupa bot atmaq olmaz... Çıx get burdan!!!")
             else:
                 try:
                     message.delete()
                 except BadRequest as excp:
-                    if excp.message == "Message to delete not found":
+                    if excp.message == "Silinəcək mesaj tapılmadı":
                         pass
                     else:
                         LOGGER.exception("ERROR in lockables")
@@ -230,7 +230,7 @@ def rest_handler(bot: Bot, update: Update):
             try:
                 msg.delete()
             except BadRequest as excp:
-                if excp.message == "Message to delete not found":
+                if excp.message == "Silinəcək mesaj tapılmadı":
                     pass
                 else:
                     LOGGER.exception("ERROR in restrictions")
@@ -241,9 +241,9 @@ def build_lock_message(chat_id):
     locks = sql.get_locks(chat_id)
     restr = sql.get_restr(chat_id)
     if not (locks or restr):
-        res = "There are no current locks in this chat."
+        res = "Bu qrupda qadağa olunan heçnə yoxdur"
     else:
-        res = "These are the locks in this chat:"
+        res = "Söhbətdə açıq olub olmayan kilitlər listi"
         if locks:
             res += "\n - sticker = `{}`" \
                    "\n - audio = `{}`" \
@@ -289,18 +289,15 @@ def __chat_settings__(chat_id, user_id):
 
 
 __help__ = """
- - /locktypes: a list of possible locktypes
+ - /locktypes: qadağa oluncaqlar siyahısı
 
 *Admin only:*
- - /lock <type>: lock items of a certain type (not available in private)
- - /unlock <type>: unlock items of a certain type (not available in private)
- - /locks: the current list of locks in this chat.
+ - /lock <funksiya adı>: qeyd etdiyiniz funksiya qadağa olunur
+ - /unlock <funksiya adı>: qeyd etdiyiniz funksiya qadağa olunmuşlar siyahısından çıxarılır.
+ - /locks: bağlı və ya açıq funksiya siyahısın sizə göstərir
 
-Locks can be used to restrict a group's users.
-eg:
-Locking urls will auto-delete all messages with urls which haven't been whitelisted, locking stickers will delete all \
-stickers, etc.
-Locking bots will stop non-admins from adding bots to the chat.
+Bağladığınız funksiyalar yalnız istifadəçilərə şamil edilir.
+Misal üçün linkləri bağlasaz heç bir istifadəçi qrupa link ata bilməyəcək...
 """
 
 __mod_name__ = "Locks"
