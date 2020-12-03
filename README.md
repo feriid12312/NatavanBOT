@@ -12,10 +12,12 @@ I'll also help when a database schema changes, and some table column needs to be
 Maria [xəbər kanalına](https://t.me/MarieNews) qoşularaq repo haqqında yenilikləri görə bilərsiz.
 
 Alternativ olaraq, şəxsən mənimlə [Telegramda əlaqə](https://t.me/valiyevali) əlaqə saxlaya bilərsiz.
+Əgər problem olarsa [Azərbaycan dəstək qrup](https://t.me/valiyevali)umuza qatıla bilərsiz.
+
 
 ## Herokuya deploy etmək üçün aşaqdakı butona basın! (Asan yol)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaBOT)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaHelpBot)
 
 ## Starting the bot.
 
