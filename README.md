@@ -1,4 +1,4 @@
-# Azərbaycan dilində Qrup İdarəedici Lamiya Bot
+# Azərbaycan dilində Qrup İdarəedici Lamiya Bot (Hal hazırda tərcümə olunur)
 Bot python proqramlaşdırma dili ilə işləyir. 
 
 Mən qrupda idarə etməni sadələşdirirəm. Bu reponu Herokuya deploy edərək istifadə edə bilərsən.
