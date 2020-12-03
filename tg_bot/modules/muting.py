@@ -25,33 +25,33 @@ def mute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You'll need to either give me a username to mute, or reply to someone to be muted.")
+        message.reply_text("Mute ediləcək adamın ya adını yaz yada mesajına cavab olaraq bu əmri istifadə et.someone to be muted.")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I'm not muting myself!")
+        message.reply_text("Özümü sustura bilmirəm...")
         return ""
 
     member = chat.get_member(int(user_id))
 
     if member:
         if is_user_admin(chat, user_id, member=member):
-            message.reply_text("Afraid I can't stop an admin from talking!")
+            message.reply_text("Qorxuram ki bir admini sustura bilməyəcəm!")
 
         elif member.can_send_messages is None or member.can_send_messages:
             bot.restrict_chat_member(chat.id, user_id, can_send_messages=False)
-            message.reply_text("👍🏻 muted! 🤐")
+            message.reply_text("👍🏻 Susturuldu! 🤐")
             return "<b>{}:</b>" \
                    "\n#MUTE" \
                    "\n<b>Admin:</b> {}" \
-                   "\n<b>User:</b> {}".format(html.escape(chat.title),
+                   "\n<b>İstifadəçi:</b> {}".format(html.escape(chat.title),
                                               mention_html(user.id, user.first_name),
                                               mention_html(member.user.id, member.user.first_name))
 
         else:
-            message.reply_text("This user is already muted!")
+            message.reply_text("Bu istifadəçi artıq susub...!")
     else:
-        message.reply_text("This user isn't in the chat!")
+        message.reply_text("Qrupda belə istifadəçi yoxdu!")
 
     return ""
 
@@ -67,7 +67,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You'll need to either give me a username to unmute, or reply to someone to be unmuted.")
+        message.reply_text("Unmute ediləcək adamın ya adını yaz yada mesajına cavab olaraq bu əmri istifadə et.someone to be muted.")
         return ""
 
     member = chat.get_member(int(user_id))
@@ -75,7 +75,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
     if member.status != 'kicked' and member.status != 'left':
         if member.can_send_messages and member.can_send_media_messages \
                 and member.can_send_other_messages and member.can_add_web_page_previews:
-            message.reply_text("This user already has the right to speak.")
+            message.reply_text("Bu istifadəçi onsuzda danışa bilir.")
         else:
             bot.restrict_chat_member(chat.id, int(user_id),
                                      can_send_messages=True,
@@ -86,12 +86,11 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
             return "<b>{}:</b>" \
                    "\n#UNMUTE" \
                    "\n<b>Admin:</b> {}" \
-                   "\n<b>User:</b> {}".format(html.escape(chat.title),
+                   "\n<b>İstifadəçi:</b> {}".format(html.escape(chat.title),
                                               mention_html(user.id, user.first_name),
                                               mention_html(member.user.id, member.user.first_name))
     else:
-        message.reply_text("This user isn't even in the chat, unmuting them won't make them talk more than they "
-                           "already do!")
+        message.reply_text("Belə istifadəçi söhbətdə yoxdu...")
 
     return ""
 
@@ -109,28 +108,28 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("Bir istifadəçiyə istinad etmirsiz.")
         return ""
 
     try:
         member = chat.get_member(user_id)
     except BadRequest as excp:
         if excp.message == "User not found":
-            message.reply_text("I can't seem to find this user")
+            message.reply_text("İstifadəçini tapmaq olmur.")
             return ""
         else:
             raise
 
     if is_user_admin(chat, user_id, member):
-        message.reply_text("I really wish I could mute admins...")
+        message.reply_text("Admini səssizə almağı bacara bilmirəm((")
         return ""
 
     if user_id == bot.id:
-        message.reply_text("I'm not gonna MUTE myself, are you crazy?")
+        message.reply_text("Mən özümü susturmuyacam...")
         return ""
 
     if not reason:
-        message.reply_text("You haven't specified a time to mute this user for!")
+        message.reply_text("Zaman qeyd etməmisiz.")
         return ""
 
     split_reason = reason.split(None, 1)
@@ -161,27 +160,27 @@ def temp_mute(bot: Bot, update: Update, args: List[str]) -> str:
             message.reply_text("shut up! 😠 Muted for {}!".format(time_val))
             return log
         else:
-            message.reply_text("This user is already muted.")
+            message.reply_text("Bu istifadəçi artıq susub....")
 
     except BadRequest as excp:
-        if excp.message == "Reply message not found":
+        if excp.message == "Yönləndirilmiş mesaş yoxdu":
             # Do not reply
-            message.reply_text("shut up! 😠 Muted for {}!".format(time_val), quote=False)
+            message.reply_text("Ağzını yum! 😠 Səbəb {}!".format(time_val), quote=False)
             return log
         else:
             LOGGER.warning(update)
             LOGGER.exception("ERROR muting user %s in chat %s (%s) due to %s", user_id, chat.title, chat.id,
                              excp.message)
-            message.reply_text("Well damn, I can't mute that user.")
+            message.reply_text("Lənət olsun... Bu istifadəçini susdura bilmirəm")
 
     return ""
 
 
 __help__ = """
-*Admin only:*
- - /mute <userhandle>: silences a user. Can also be used as a reply, muting the replied to user.
- - /tmute <userhandle> x(m/h/d): mutes a user for x time. (via handle, or reply). m = minutes, h = hours, d = days.
- - /unmute <userhandle>: unmutes a user. Can also be used as a reply, muting the replied to user.
+*Yalnız adminlər üçün:*
+ - /mute <istifadəçi-adı və ya id>: İstifadəçini susturmaq.
+ - /tmute <istifadəçi-adı və ya id> x(m/h/d): istifadəçini müəyyən vaxtədək susturmaq. . m = dəqiqə, h = saat, d = gün.
+ - /unmute <istifadəçi-adı və ya id>: unmutes a user. Can also be used as a reply, muting the replied to user.
 """
 
 __mod_name__ = "Mute"
