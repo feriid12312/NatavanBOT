@@ -82,7 +82,7 @@ def unmute(bot: Bot, update: Update, args: List[str]) -> str:
                                      can_send_media_messages=True,
                                      can_send_other_messages=True,
                                      can_add_web_page_previews=True)
-            message.reply_text("Unmuted!")
+            message.reply_text("Istifadəçi artıq danışa bilər!")
             return "<b>{}:</b>" \
                    "\n#UNMUTE" \
                    "\n<b>Admin:</b> {}" \
@@ -180,7 +180,7 @@ __help__ = """
 *Yalnız adminlər üçün:*
  - /mute <istifadəçi-adı və ya id>: İstifadəçini susturmaq.
  - /tmute <istifadəçi-adı və ya id> x(m/h/d): istifadəçini müəyyən vaxtədək susturmaq. . m = dəqiqə, h = saat, d = gün.
- - /unmute <istifadəçi-adı və ya id>: unmutes a user. Can also be used as a reply, muting the replied to user.
+ - /unmute <istifadəçi-adı və ya id>: susturulan istifadəçinin səsini açar.
 """
 
 __mod_name__ = "Mute"
