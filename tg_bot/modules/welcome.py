@@ -88,12 +88,12 @@ def del_joined(bot: Bot, update: Update, args: List[str]) -> str:
         if del_pref:
             update.effective_message.reply_text("I should be deleting `user` joined the chat messages now.")
         else:
-            update.effective_message.reply_text("I'm currently not deleting old joined messages!")
+            update.effective_message.reply_text("Hazırda köhnə qoşulmuş mesajları silmirəm!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
         sql.set_del_joined(str(chat.id), True)
-        update.effective_message.reply_text("I'll try to delete old joined messages!")
+        update.effective_message.reply_text("Mən köhnə mesajları silməyə çalışacam.")
         return "<b>{}:</b>" \
                "\n#CLEAN_SERVICE_MESSAGE" \
                "\n<b>Admin:</b> {}" \
@@ -249,8 +249,8 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's welcome setting set to: `{}`.\n*The welcome message "
-            "(not filling the {{}}) is:*".format(pref),
+            "Qarşılama mesajı açıqdır? `{}`.\n*Xoş gəldin mesaj:"
+            "{}".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if welcome_type == sql.Types.BUTTON_TEXT:
@@ -295,8 +295,8 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0] == "noformat"
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's goodbye setting set to: `{}`.\n*The goodbye  message "
-            "(not filling the {{}}) is:*".format(pref),
+            "Xoş getdin mesajı açıqdır?: `{}`.\n*Xoş getdin mesajı "
+            "{}".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if goodbye_type == sql.Types.BUTTON_TEXT:
@@ -347,7 +347,7 @@ def set_welcome(bot: Bot, update: Update) -> str:
         return ""
 
     sql.set_custom_welcome(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom welcome message!")
+    msg.reply_text("Xoş gəldin mesajı quraşdırıldı!")
 
     return "<b>{}:</b>" \
            "\n#SET_WELCOME" \
@@ -363,7 +363,7 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_welcome(chat.id, sql.DEFAULT_WELCOME, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset welcome message to default!")
+    update.effective_message.reply_text("Xoş gəldin mesajı sıfırlandı")
     return "<b>{}:</b>" \
            "\n#RESET_WELCOME" \
            "\n<b>Admin:</b> {}" \
@@ -385,7 +385,7 @@ def set_goodbye(bot: Bot, update: Update) -> str:
         return ""
 
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom goodbye message!")
+    msg.reply_text("Xoş getdin mesajı quraşdırıldı")
     return "<b>{}:</b>" \
            "\n#SET_GOODBYE" \
            "\n<b>Admin:</b> {}" \
@@ -400,7 +400,7 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset goodbye message to default!")
+    update.effective_message.reply_text("Xoş getdin mesajı sıfırlandı")
     return "<b>{}:</b>" \
            "\n#RESET_GOODBYE" \
            "\n<b>Admin:</b> {}" \
