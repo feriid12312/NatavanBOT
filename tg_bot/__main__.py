@@ -20,7 +20,7 @@ from tg_bot.modules.helper_funcs.misc import paginate_modules
 PM_START_TEXT = """
 Salam {}, mənim adım {}! Mənim haqqımda məlumat öyrənmək üçün /help yaz... 
 
-Mən qrup idarə edicisiyəm və [sabibim budur](tg://user?id={}).
+Mən qrup idarə edicisiyəm və [sahibim budur](tg://user?id={}).
 
 Mənim yeniləmələrim haqqında - @MarieChechi & və dəstək qrupumuz olan @LamiyaSupport -a qatıla bilərsiz.
 
