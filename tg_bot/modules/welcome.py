@@ -250,7 +250,7 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
             "Qarşılama mesajı açıqdır? `{}`.\n*Xoş gəldin mesaj:"
-            "{}".format(pref),
+            "{{}}".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if welcome_type == sql.Types.BUTTON_TEXT:
@@ -296,7 +296,7 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
             "Xoş getdin mesajı açıqdır?: `{}`.\n*Xoş getdin mesajı "
-            "{}".format(pref),
+            "{{}}".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if goodbye_type == sql.Types.BUTTON_TEXT:
