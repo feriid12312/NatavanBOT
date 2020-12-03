@@ -72,7 +72,7 @@ def ban(bot: Bot, update: Update, args: List[str]) -> str:
             raise
 
     if is_user_ban_protected(chat, user_id, member):
-        message.reply_text("Kaş adminləri ban edə biləcək super güclərim olsa...")
+        message.reply_text("Admin olmadan necə ban edə bilərsən?")
         return ""
 
     if user_id == bot.id:
