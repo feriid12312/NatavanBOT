@@ -18,19 +18,19 @@ from tg_bot.modules.helper_funcs.filters import CustomFilters
 from tg_bot.modules.log_channel import loggable
 from tg_bot.modules.sql import users_sql
 
-LOCK_TYPES = {'sticker (Stikerlər)': Filters.sticker,
-              'audio (Musiqilər)': Filters.audio,
-              'voice (Səs atmaq)': Filters.voice,
-              'document (Fayl göndərmək)': Filters.document,
-              'video (Video göndərmək)': Filters.video,
-              'contact (Kontakt paylaşmaq)': Filters.contact,
-              'photo (Şəkil)': Filters.photo,
-              'gif (GIF)': Filters.document & CustomFilters.mime_type("video/mp4"),
-              'url (Link göndərmək)': Filters.entity(MessageEntity.URL) | Filters.caption_entity(MessageEntity.URL),
-              'bots (Botlar)': Filters.status_update.new_chat_members,
-              'forward (Yönləndirilmiş mesajlar)': Filters.forwarded,
-              'game (Sətraltı oyunlar)': Filters.game,
-              'location (Məkan paylaşımı)': Filters.location,
+LOCK_TYPES = {'sticker': Filters.sticker,
+              'audio': Filters.audio,
+              'voice': Filters.voice,
+              'document': Filters.document,
+              'video': Filters.video,
+              'contact': Filters.contact,
+              'photo': Filters.photo,
+              'gif': Filters.document & CustomFilters.mime_type("video/mp4"),
+              'url': Filters.entity(MessageEntity.URL) | Filters.caption_entity(MessageEntity.URL),
+              'bots': Filters.status_update.new_chat_members,
+              'forward': Filters.forwarded,
+              'game': Filters.game,
+              'location': Filters.location,
               }
 
 GIF = Filters.document & CustomFilters.mime_type("video/mp4")
@@ -39,9 +39,9 @@ MEDIA = Filters.audio | Filters.document | Filters.video | Filters.voice | Filte
 MESSAGES = Filters.text | Filters.contact | Filters.location | Filters.venue | Filters.command | MEDIA | OTHER
 PREVIEWS = Filters.entity("url")
 
-RESTRICTION_TYPES = {'messages (Mesajlar)': MESSAGES,
-                     'media (Ümumi Media)': MEDIA,
-                     'other (Digər)': OTHER,
+RESTRICTION_TYPES = {'messages': MESSAGES,
+                     'media': MEDIA,
+                     'other': OTHER,
                      # 'previews': PREVIEWS, # NOTE: this has been removed cos its useless atm.
                      'all': Filters.all}
 
