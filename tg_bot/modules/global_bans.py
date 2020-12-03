@@ -198,7 +198,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
                                                                          user_chat.first_name)),
                   html=True)
 
-    message.reply_text("This person has been un-gbanned and pardon is granted!")
+    message.reply_text("Bu istifadəçi əfv edildi!")
 
 
 @run_async
