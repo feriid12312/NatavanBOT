@@ -49,8 +49,8 @@ def extract_user_and_text(message: Message, args: List[str]) -> (Optional[int], 
         user = args[0]
         user_id = get_user_id(user)
         if not user_id:
-            message.reply_text("I don't have that user in my db. You'll be able to interact with them if "
-                               "you reply to that person's message instead, or forward one of that user's messages.")
+            message.reply_text("Bu istifadəçi görünüşə görə bu qrupda ya mesaj yazmayıb yada mənim DB'də məlumat yoxdur."
+                               "Zəhmət olmasa həmən adamın mesajın cavab olaraq ban edin.")
             return None, None
 
         else:
