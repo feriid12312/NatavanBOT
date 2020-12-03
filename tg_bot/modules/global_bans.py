@@ -150,7 +150,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
         return
 
     if not sql.is_user_gbanned(user_id):
-        message.reply_text("Bu istif gban olunmayıb!")
+        message.reply_text("Bu istifadəçi gban olunmayıb!")
         return
 
     banner = update.effective_user  # type: Optional[User]
