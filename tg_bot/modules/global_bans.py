@@ -25,7 +25,7 @@ GBAN_ERRORS = {
     "İstifadəçi ID tapılmadı",
     "Group chat was deactivated",
     "Need to be inviter of a user to kick it from a basic group",
-    "Chat_admin_required",
+    "Adminlik hüquqları lazımdır",
     "Only the creator of a basic group can kick group administrators",
     "Channel_private",
     "Not in the chat"
@@ -35,7 +35,7 @@ UNGBAN_ERRORS = {
     "User is an administrator of the chat",
     "Chat not found",
     "Not enough rights to restrict/unrestrict chat member",
-    "User_not_participant",
+    "İstifadəçi qrupda deyil",
     "Method is available for supergroup and channel chats only",
     "Not in the chat",
     "Channel_private",
