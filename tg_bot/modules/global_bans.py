@@ -33,7 +33,7 @@ GBAN_ERRORS = {
 
 UNGBAN_ERRORS = {
     "User is an administrator of the chat",
-    "Chat not found",
+    "Chat not found"
     "Not enough rights to restrict/unrestrict chat member",
     "User_not_participant",
     "Method is available for supergroup and channel chats only",
@@ -130,7 +130,7 @@ def gban(bot: Bot, update: Update, args: List[str]):
             pass
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS, 
-                  "{} has been successfully gbanned!".format(mention_html(user_chat.id, user_chat.first_name)),
+                  "{} gban olundu!".format(mention_html(user_chat.id, user_chat.first_name)),
                 html=True)
     message.reply_text("İstifadəçi Qlobal Ban oldu.")
 
@@ -146,7 +146,7 @@ def ungban(bot: Bot, update: Update, args: List[str]):
 
     user_chat = bot.get_chat(user_id)
     if user_chat.type != 'private':
-        message.reply_text("That's not a user!")
+        message.reply_text("Bir insanı qeyd edin!")
         return
 
     if not sql.is_user_gbanned(user_id):
@@ -194,11 +194,11 @@ def ungban(bot: Bot, update: Update, args: List[str]):
     sql.ungban_user(user_id)
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS, 
-                  "{} has been pardoned from gban!".format(mention_html(user_chat.id, 
+                  "{} əfv olundu!".format(mention_html(user_chat.id, 
                                                                          user_chat.first_name)),
                   html=True)
 
-    message.reply_text("This person has been un-gbanned and pardon is granted!")
+    message.reply_text("Bu istifadəçinin qlobal banı artıq qaldırılıb!")
 
 
 @run_async
@@ -206,7 +206,7 @@ def gbanlist(bot: Bot, update: Update):
     banned_users = sql.get_gban_list()
 
     if not banned_users:
-        update.effective_message.reply_text("There aren't any gbanned users! You're kinder than I expected...")
+        update.effective_message.reply_text("Gban olunan istifadəçi yoxdur.")
         return
 
     banfile = 'Screw these guys.\n'
@@ -218,14 +218,14 @@ def gbanlist(bot: Bot, update: Update):
     with BytesIO(str.encode(banfile)) as output:
         output.name = "gbanlist.txt"
         update.effective_message.reply_document(document=output, filename="gbanlist.txt",
-                                                caption="Here is the list of currently gbanned users.")
+                                                caption="Burda gban olan istifadəçi listi var.")
 
 
 def check_and_ban(update, user_id, should_message=True):
     if sql.is_user_gbanned(user_id):
         update.effective_chat.kick_member(user_id)
         if should_message:
-            update.effective_message.reply_text("This is a bad person, they shouldn't be here!")
+            update.effective_message.reply_text("Bu istifadəçini Sudo (Botun sahibi)-lar qlobal ban edib.")
 
 
 @run_async
