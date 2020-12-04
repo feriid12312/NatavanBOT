@@ -25,19 +25,19 @@ def gmute(bot: Bot, update: Update, args: List[str]):
     user_id, reason = extract_user_and_text(message, args)
 
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("Deyəsən bir istifadəçiyə istinad etmirsiniz.")
         return
 
     if int(user_id) in SUDO_USERS:
-        message.reply_text("I spy, with my little eye... a sudo user war! Why are you guys turning on each other?")
+        message.reply_text("Mən kiçik gözümlə casusluq edirəm ... sudo istifadəçiləri müharibəsi! Uşaqlar niyə bir-birinizlə dalaşırsız?")
         return
 
     if int(user_id) in SUPPORT_USERS:
-        message.reply_text("OOOH someone's trying to gmute a support user! *grabs popcorn*")
+        message.reply_text("AHAHAH Kimsə Support İstifadəçini Qlobal Mute etmək istiyir *popcorn gətirim gəlirəm*")
         return
 
     if user_id == bot.id:
-        message.reply_text("-_- So funny, lets gmute myself why don't I? Nice try.")
+        message.reply_text("Çox gülməli idi birdə yoxla.")
         return
 
     try:
@@ -47,29 +47,29 @@ def gmute(bot: Bot, update: Update, args: List[str]):
         return
 
     if user_chat.type != 'private':
-        message.reply_text("That's not a user!")
+        message.reply_text("Bu istifadəçi deyil!")
         return
 
     if sql.is_user_gmuted(user_id):
         if not reason:
-            message.reply_text("This user is already gmuted; I'd change the reason, but you haven't given me one...")
+            message.reply_text("Bu istifadəçi artıq səssizləşdirilib səbəb bildirilməyib")
             return
 
         success = sql.update_gmute_reason(user_id, user_chat.username or user_chat.first_name, reason)
         if success:
-            message.reply_text("This user is already gmuted; I've gone and updated the gmute reason though!")
+            message.reply_text("İstifadəçisi onsuz da səssizdir!")
         else:
-            message.reply_text("Do you mind trying again? I thought this person was gmuted, but then they weren't? "
-                               "Am very confused")
+            message.reply_text("İstifadəçisi onsuz da səssizdir! "
+                               "Başım çox qarışdı")
 
         return
 
-    message.reply_text("*Gets duct tape ready* 😉")
+    message.reply_text("*Hazırlaşın qlobal mute gəlir* 😉")
 
     muter = update.effective_user  # type: Optional[User]
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
-                 "{} is gmuting user {} "
-                 "because:\n{}".format(mention_html(muter.id, muter.first_name),
+                 "{} adlı istifadəçi {}-ni susturdu "
+                 "Səbəb:\n{}".format(mention_html(muter.id, muter.first_name),
                                        mention_html(user_chat.id, user_chat.first_name), reason or "No reason given"),
                  html=True)
 
@@ -116,8 +116,8 @@ def gmute(bot: Bot, update: Update, args: List[str]):
         except TelegramError:
             pass
 
-    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "gmute complete!")
-    message.reply_text("Person has been gmuted.")
+    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "Əməliyyatlar bitdi")
+    message.reply_text("İstifadəçi qlobalda susturldu.")
 
 
 @run_async
@@ -126,24 +126,24 @@ def ungmute(bot: Bot, update: Update, args: List[str]):
 
     user_id = extract_user(message, args)
     if not user_id:
-        message.reply_text("You don't seem to be referring to a user.")
+        message.reply_text("Deyəsən bir istifadəçiyə istinad etmirsiniz.")
         return
 
     user_chat = bot.get_chat(user_id)
     if user_chat.type != 'private':
-        message.reply_text("That's not a user!")
+        message.reply_text("Bu istifadəçi deyil!")
         return
 
     if not sql.is_user_gmuted(user_id):
-        message.reply_text("This user is not gmuted!")
+        message.reply_text("Bu istifadəçi qlobalda onsuz rahat danışa bilir.")
         return
 
     muter = update.effective_user  # type: Optional[User]
 
-    message.reply_text("I'll let {} speak again, globally.".format(user_chat.first_name))
+    message.reply_text("Yaxşı {} sənə ikici şans verirəm qlobalda danışa bilərsən.".format(user_chat.first_name))
 
     send_to_list(bot, SUDO_USERS + SUPPORT_USERS,
-                 "{} has ungmuted user {}".format(mention_html(muter.id, muter.first_name),
+                 "{} adlı istifadəçi  {}-nin qlobalda danışmasına icazə verdi".format(mention_html(muter.id, muter.first_name),
                                                    mention_html(user_chat.id, user_chat.first_name)),
                  html=True)
 
@@ -182,17 +182,17 @@ def ungmute(bot: Bot, update: Update, args: List[str]):
             elif excp.message == "Chat_admin_required":
                 pass
             else:
-                message.reply_text("Could not un-gmute due to: {}".format(excp.message))
-                bot.send_message(OWNER_ID, "Could not un-gmute due to: {}".format(excp.message))
+                message.reply_text("Bu istifadəçini ungmute etmək olmur {}".format(excp.message))
+                bot.send_message(OWNER_ID, "Bu Səbəbə görə səssizləşdirilə bilmədi: {}".format(excp.message))
                 return
         except TelegramError:
             pass
 
     sql.ungmute_user(user_id)
 
-    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "un-gmute complete!")
+    send_to_list(bot, SUDO_USERS + SUPPORT_USERS, "Əməliyyatlar bitdi")
 
-    message.reply_text("Person has been un-gmuted.")
+    message.reply_text("İstifadəçi qlobalda danışa bilər.")
 
 
 @run_async
@@ -200,14 +200,14 @@ def gmutelist(bot: Bot, update: Update):
     muted_users = sql.get_gmute_list()
 
     if not muted_users:
-        update.effective_message.reply_text("There aren't any gmuted users! You're kinder than I expected...")
+        update.effective_message.reply_text("Heç bir səssiz istifadəçi yoxdur! Gözlədiyimdən daha mehribansan ...")
         return
 
-    mutefile = 'Screw these guys.\n'
+    mutefile = '.\n'
     for user in muted_users:
         mutefile += "[x] {} - {}\n".format(user["name"], user["user_id"])
         if user["reason"]:
-            mutefile += "Reason: {}\n".format(user["reason"])
+            mutefile += "Səbəb: {}\n".format(user["reason"])
 
     with BytesIO(str.encode(mutefile)) as output:
         output.name = "gmutelist.txt"
