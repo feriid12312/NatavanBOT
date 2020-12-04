@@ -7,7 +7,7 @@ Mən [Marie](https://t.me/BanhammerMarie_bot) reposundan istifadə edərək [Lam
 
 Maria [xəbər kanalına](https://t.me/MarieNews) qoşularaq repo haqqında yenilikləri görə bilərsiz.
 
-Alternativ olaraq, şəxsən mənimlə [Telegramda əlaqə](https://t.me/valiyevali) əlaqə saxlaya bilərsiz.
+Alternativ olaraq, şəxsən mənimlə [Telegramda əlaqə](https://t.me/valiyevali) saxlaya bilərsiz.
 Əgər problem olarsa [Azərbaycan dəstək qrupu](https://t.me/LamiyaSupport)'a qatıla bilərsiz.
 
 Marie and I are moderating a [support group](https://t.me/MarieSupport), where you can ask for help setting up your
