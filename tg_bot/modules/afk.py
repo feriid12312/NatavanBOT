@@ -61,9 +61,9 @@ def reply_afk(bot: Bot, update: Update):
             if sql.is_afk(user_id):
                 user = sql.check_afk_status(user_id)
                 if not user.reason:
-                    res = "{} artıq afk-dır! səbəb :\n{} ".format(fst_name)
+                    res = "{} afk-dır! səbəb :\n{} ".format(fst_name)
                 else:
-                    res = "{} artıq afk deyil! səbəb :\n{}. ".format(fst_name, user.reason)
+                    res = "{} afk-dır! səbəb :\n{}. ".format(fst_name, user.reason)
                 message.reply_text(res)
 
 
