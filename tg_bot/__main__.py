@@ -235,9 +235,9 @@ def get_help(bot: Bot, update: Update):
     # ONLY send help in PM
     if chat.type != chat.PRIVATE:
 
-        update.effective_message.reply_text("Contact me in PM to get the list of possible commands.",
+        update.effective_message.reply_text("Komandalar haqqında kömək üçün mənə şəxsidə yazın.",
                                             reply_markup=InlineKeyboardMarkup(
-                                                [[InlineKeyboardButton(text="Help",
+                                                [[InlineKeyboardButton(text="Komək",
                                                                        url="t.me/{}?start=help".format(
                                                                            bot.username))]]))
         return
