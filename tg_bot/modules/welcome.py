@@ -36,7 +36,7 @@ def send(update, message, keyboard, backup_message):
         msg = update.effective_message.reply_text(message, parse_mode=ParseMode.MARKDOWN, reply_markup=keyboard)
     except IndexError:
         msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                  "\nNote: the current message was "
+                                                                  "\nMarkdown xətası "
                                                                   "invalid due to markdown issues. Could be "
                                                                   "due to the user's name."),
                                                   parse_mode=ParseMode.MARKDOWN)
@@ -49,19 +49,19 @@ def send(update, message, keyboard, backup_message):
     except BadRequest as excp:
         if excp.message == "Button_url_invalid":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has an invalid url "
-                                                                      "in one of its buttons. Please update."),
+                                                                      "\nXəta: qeyd etdiyiniz link səhvdir. "
+                                                                      "Zəhmət olmasa linki yeniləyin."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Unsupported url protocol":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has buttons which "
-                                                                      "use url protocols that are unsupported by "
-                                                                      "telegram. Please update."),
+                                                                      "\nXəta: qeyd etdiyiniz linkdə problem var. "
+                                                                      "yazdığınız link telegram tərəfindən "
+                                                                      "qadağa olunmuş linkdir. Zəhmət olmasa linki yeniləyin."),
                                                       parse_mode=ParseMode.MARKDOWN)
         elif excp.message == "Wrong url host":
             msg = update.effective_message.reply_text(markdown_parser(backup_message +
-                                                                      "\nNote: the current message has some bad urls. "
-                                                                      "Please update."),
+                                                                      "\nXəta: qeyd etdiyiniz linkdə səhv var. "
+                                                                      "Zəhmət olmasa linki yeniləyin."),
                                                       parse_mode=ParseMode.MARKDOWN)
             LOGGER.warning(message)
             LOGGER.warning(keyboard)
@@ -86,7 +86,7 @@ def del_joined(bot: Bot, update: Update, args: List[str]) -> str:
     if not args:
         del_pref = sql.get_del_pref(chat.id)
         if del_pref:
-            update.effective_message.reply_text("I should be deleting `user` joined the chat messages now.")
+            update.effective_message.reply_text("Bundan sonra qrupa qatılan istifadəçi bildirişini silməliyəm.")
         else:
             update.effective_message.reply_text("I'm currently not deleting old joined messages!")
         return ""
@@ -109,7 +109,7 @@ def del_joined(bot: Bot, update: Update, args: List[str]) -> str:
                                                                           mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+        update.effective_message.reply_text("Mən 'on/yes' və 'off/no' başa düşürəm!")
         return ""
 
 
@@ -133,7 +133,7 @@ def new_member(bot: Bot, update: Update):
         for new_mem in new_members:
             # Give the owner a special welcome
             if new_mem.id == OWNER_ID:
-                update.effective_message.reply_text("Master is in the houseeee, let's get this party started!")
+                update.effective_message.reply_text("Qrupun sahibi gəldi party-ə başlayaq!")
                 continue
 
             # Don't welcome yourself
@@ -201,7 +201,7 @@ def left_member(bot: Bot, update: Update):
 
             # Give the owner a special goodbye
             if left_mem.id == OWNER_ID:
-                update.effective_message.reply_text("RIP Master")
+                update.effective_message.reply_text("Ölü Sahib")
                 return
 
             # if media goodbye, use appropriate function for it
@@ -249,8 +249,8 @@ def welcome(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0].lower() == "noformat"
         pref, welcome_m, welcome_type = sql.get_welc_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's welcome setting set to: `{}`.\n*The welcome message "
-            "(not filling the {{}}) is:*".format(pref),
+            "Qrupun xoş gəldin mesajı: `{}`.\n* "
+            "( {{}}) :*".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if welcome_type == sql.Types.BUTTON_TEXT:
@@ -275,15 +275,15 @@ def welcome(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_welc_preference(str(chat.id), True)
-            update.effective_message.reply_text("I'll be polite!")
+            update.effective_message.reply_text("Mən nəzakətli olacağam!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_welc_preference(str(chat.id), False)
-            update.effective_message.reply_text("I'm sulking, not saying hello anymore.")
+            update.effective_message.reply_text("Artıq salam söyləmirəm, çəkirəm.")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("Mən 'on/yes' və 'off/no' başa düşürəm!")
 
 
 @run_async
@@ -295,8 +295,8 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
         noformat = args and args[0] == "noformat"
         pref, goodbye_m, goodbye_type = sql.get_gdbye_pref(chat.id)
         update.effective_message.reply_text(
-            "This chat has it's goodbye setting set to: `{}`.\n*The goodbye  message "
-            "(not filling the {{}}) is:*".format(pref),
+            "Bu qrupda olan xoş getdin mesajı: `{}`.\n*"
+            "( {{}}) *".format(pref),
             parse_mode=ParseMode.MARKDOWN)
 
         if goodbye_type == sql.Types.BUTTON_TEXT:
@@ -321,15 +321,15 @@ def goodbye(bot: Bot, update: Update, args: List[str]):
     elif len(args) >= 1:
         if args[0].lower() in ("on", "yes"):
             sql.set_gdbye_preference(str(chat.id), True)
-            update.effective_message.reply_text("I'll be sorry when people leave!")
+            update.effective_message.reply_text("İnsanlar gedəndə vidalaşma mərasimi təşkil edirəm!")
 
         elif args[0].lower() in ("off", "no"):
             sql.set_gdbye_preference(str(chat.id), False)
-            update.effective_message.reply_text("They leave, they're dead to me.")
+            update.effective_message.reply_text("Yaxşı yaxşı bundan sora gedən insan üçün yas tutmayacam.")
 
         else:
             # idek what you're writing, say yes or no
-            update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+            update.effective_message.reply_text("Mən 'on/yes' və 'off/no' başa düşürəm!")
 
 
 @run_async
@@ -343,11 +343,11 @@ def set_welcome(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Nə cavab verəcəyimi müəyyən etməmisiniz!")
         return ""
 
     sql.set_custom_welcome(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom welcome message!")
+    msg.reply_text("Xüsusi qarşılama mesajını uğurla təyin et!")
 
     return "<b>{}:</b>" \
            "\n#SET_WELCOME" \
@@ -363,7 +363,7 @@ def reset_welcome(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_welcome(chat.id, sql.DEFAULT_WELCOME, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset welcome message to default!")
+    update.effective_message.reply_text("Salamlama mesajını defolt vəziyyətinə qayıtdı!")
     return "<b>{}:</b>" \
            "\n#RESET_WELCOME" \
            "\n<b>Admin:</b> {}" \
@@ -381,11 +381,11 @@ def set_goodbye(bot: Bot, update: Update) -> str:
     text, data_type, content, buttons = get_welcome_type(msg)
 
     if data_type is None:
-        msg.reply_text("You didn't specify what to reply with!")
+        msg.reply_text("Nə cavab verəcəyinizi müəyyən etməmisiniz!")
         return ""
 
     sql.set_custom_gdbye(chat.id, content or text, data_type, buttons)
-    msg.reply_text("Successfully set custom goodbye message!")
+    msg.reply_text("Xüsusi vida mesajını uğurla təyin et!")
     return "<b>{}:</b>" \
            "\n#SET_GOODBYE" \
            "\n<b>Admin:</b> {}" \
@@ -400,7 +400,7 @@ def reset_goodbye(bot: Bot, update: Update) -> str:
     chat = update.effective_chat  # type: Optional[Chat]
     user = update.effective_user  # type: Optional[User]
     sql.set_custom_gdbye(chat.id, sql.DEFAULT_GOODBYE, sql.Types.TEXT)
-    update.effective_message.reply_text("Successfully reset goodbye message to default!")
+    update.effective_message.reply_text("Əlvida mesajı defolt olaraq qeyd olundu!")
     return "<b>{}:</b>" \
            "\n#RESET_GOODBYE" \
            "\n<b>Admin:</b> {}" \
@@ -418,14 +418,14 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
     if not args:
         clean_pref = sql.get_clean_pref(chat.id)
         if clean_pref:
-            update.effective_message.reply_text("I should be deleting welcome messages up to two days old.")
+            update.effective_message.reply_text("İki gün ərzində olan qarşılama mesajın silməliyəm.")
         else:
-            update.effective_message.reply_text("I'm currently not deleting old welcome messages!")
+            update.effective_message.reply_text("Hazırda köhnə salamlama mesajlarını silmirəm!")
         return ""
 
     if args[0].lower() in ("on", "yes"):
         sql.set_clean_welcome(str(chat.id), True)
-        update.effective_message.reply_text("I'll try to delete old welcome messages!")
+        update.effective_message.reply_text("Köhnə salamlama mesajlarını silməyə çalışacağam!")
         return "<b>{}:</b>" \
                "\n#CLEAN_WELCOME" \
                "\n<b>Admin:</b> {}" \
@@ -441,7 +441,7 @@ def clean_welcome(bot: Bot, update: Update, args: List[str]) -> str:
                                                                           mention_html(user.id, user.first_name))
     else:
         # idek what you're writing, say yes or no
-        update.effective_message.reply_text("I understand 'on/yes' or 'off/no' only!")
+        update.effective_message.reply_text("Mən 'on/yes' və 'off/no' başa düşürəm!")
         return ""
 
 
