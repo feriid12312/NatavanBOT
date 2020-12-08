@@ -3,12 +3,12 @@ Bot python proqramlaşdırma dili ilə işləyir.
 
 Mən qrupda idarəetməni sadələşdirirəm. Bu reponu Herokuya deploy edərək istifadə edə bilərsən.
 
-Mən [Marie](https://t.me/BanhammerMarie_bot) reposundan istifadə edərək [Lamiya Bot](t.me/LamiyaHelpBot) kimi bot tərcümə etmişəm Səndə bunu öz botuna deploy edə bilərsən.
+Mən [Marie](https://t.me/BanhammerMarie_bot) reposundan istifadə edərək [Natavan](t.me/natavan_bot) kimi bot tərcümə etmişəm Səndə bunu öz botuna deploy edə bilərsən.
 
 Maria [xəbər kanalına](https://t.me/MarieNews) qoşularaq repo haqqında yenilikləri görə bilərsiz.
 
 Alternativ olaraq, şəxsən mənimlə [Telegramda əlaqə](https://t.me/valiyevali) saxlaya bilərsiz.
-Əgər problem olarsa [Azərbaycan dəstək qrupu](https://t.me/LamiyaSupport)'a qatıla bilərsiz.
+Əgər problem olarsa [Azərbaycan dəstək qrupu](https://t.me/NatavanSupport)'a qatıla bilərsiz.
 
 Marie and I are moderating a [support group](https://t.me/MarieSupport), where you can ask for help setting up your
 bot, discover/request new features, report bugs, and stay in the loop whenever a new update is available. Of course
