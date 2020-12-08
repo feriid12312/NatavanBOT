@@ -19,7 +19,7 @@ I'll also help when a database schema changes, and some table column needs to be
 
 ## Herokuya deploy etmək üçün aşaqdakı butona basın! (Asan yol)
 
-[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaHelpBot)
+[![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/ValiyevAli/LamiyaBOT)
 
 ## Starting the bot.
 
